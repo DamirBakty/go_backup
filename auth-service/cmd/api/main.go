@@ -14,7 +14,7 @@ import (
 	_ "github.com/jackc/pgx/v4/stdlib"
 )
 
-const webPort = "8000"
+const webPort = "80"
 
 var counts int64
 
@@ -25,10 +25,10 @@ type Config struct {
 
 func main() {
 	log.Println("Starting auth service")
-
+	fmt.Println("damir")
 	// TODO connect to DB
 	conn := connectToDB()
-	if conn != nil {
+	if conn == nil {
 		log.Panic("Cannot connect to Postgres!")
 	}
 
@@ -63,7 +63,7 @@ func openDB(dsn string) (*sql.DB, error) {
 
 func connectToDB() *sql.DB {
 	dsn := os.Getenv("DSN")
-
+	fmt.Println(dsn)
 	for {
 		connection, err := openDB(dsn)
 		if err != nil {
